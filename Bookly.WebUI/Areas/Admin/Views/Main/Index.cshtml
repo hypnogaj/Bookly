@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Rüya Sena Demirci";
+}
+
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">
+                Kitaplar
+                <span class="float-end badge bg-light text-dark">@ViewBag.ProductsCount</span>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="/Admin/Products">Kitaplar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">
+                Kategoriler
+                <span class="float-end badge bg-light text-dark">@ViewBag.CategoriesCount</span>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="/Admin/Categories">Kategoriler</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">
+                Yayınevi
+                <span class="float-end badge bg-light text-dark">@ViewBag.BrandsCount</span>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="/Admin/Brands">Yayınevleri</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-danger text-white mb-4">
+            <div class="card-body">
+                Kullanıcılar
+                <span class="float-end badge bg-light text-dark">@ViewBag.UsersCount</span>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="/Admin/AppUsers">Kullanıcılar</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Kitaplar
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Kitap Adı</th>
+                    <th>Kayıt Tarihi</th>
+                    <th>Kapak Görseli</th>
+                    <th>Fiyat</th>
+                    <th>Ürün Kodu</th>
+                    <th>Stok</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Kitap Adı</th>
+                    <th>Kayıt Tarihi</th>
+                    <th>Kapak Görseli</th>
+                    <th>Fiyat</th>
+                    <th>Ürün Kodu</th>
+                    <th>Stok</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in ViewBag.Products)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.CreateDate.ToString("dd.MM.yyyy")</td>
+                        <td>
+                            <img src="@Url.Content("Img/Products/" + item.Image)" alt="@item.Name" style="width:50px; height:auto;" />
+                        </td>
+
+                        <td>@item.Price.ToString("C")</td>
+                        <td>@item.ProductCode</td>
+                        <td>@item.Stock</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="/admin/assets/demo/chart-area-demo.js"></script>
+    <script src="/admin/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="/admin/js/datatables-simple-demo.js"></script>
+}
